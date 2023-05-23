@@ -27,6 +27,22 @@ export class Address {
     }
   }
 
+  get street(): string {
+    return this._street;
+  }
+
+  get number(): number {
+    return this._number;
+  }
+
+  get zip(): string {
+    return this._zip;
+  }
+
+  get city(): string {
+    return this._city;
+  }
+
   toString(): string {
     return `${this._street} ${this._number}, ${this._zip} ${this._city}`;
   }

@@ -26,6 +26,10 @@ export class Customer {
     return this._id;
   }
 
+  get address(): Address {
+    return this._address;
+  }
+
   get name(): string {
     return this._name;
   }
@@ -38,7 +42,7 @@ export class Customer {
     return this._active;
   }
 
-  setAddress(address: Address): void {
+  changeAddress(address: Address): void {
     this._address = address;
   }
 
