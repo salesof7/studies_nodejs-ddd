@@ -3,7 +3,7 @@ import { type EventHandlerInterface } from "./event-handler.interface";
 import { type EventInterface } from "./event.interface";
 
 export class EventDispatcher implements EventDispatcherInterface {
-  private readonly eventHandlers: Record<string, EventHandlerInterface[]> = {};
+  private eventHandlers: Record<string, EventHandlerInterface[]> = {};
 
   get getEventHandlers(): Record<string, EventHandlerInterface[]> {
     return this.eventHandlers;
@@ -31,11 +31,11 @@ export class EventDispatcher implements EventDispatcherInterface {
     }
   }
 
-  notify(event: EventInterface): void {
-    throw new Error("Method not implemented.");
+  unregisterAll(): void {
+    this.eventHandlers = {};
   }
 
-  unregisterAll(): void {
+  notify(event: EventInterface): void {
     throw new Error("Method not implemented.");
   }
 }
