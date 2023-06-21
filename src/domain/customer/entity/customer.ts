@@ -1,13 +1,14 @@
+import Entity from "../../shared/entity/entity.abstract";
 import { type Address } from "../value-object/address";
 
-export class Customer {
-  _id: string;
+export class Customer extends Entity {
   _name: string;
   _address!: Address;
   _active: boolean = false;
   private _rewardPoints: number = 0;
 
   constructor(id: string, name: string) {
+    super();
     this._id = id;
     this._name = name;
     this.validate();
@@ -15,10 +16,16 @@ export class Customer {
 
   validate(): void {
     if (this._id.length === 0) {
-      throw new Error("Id is required");
+      this._notification.addError({
+        context: "customer",
+        message: "Id is required",
+      });
     }
     if (this._name.length === 0) {
-      throw new Error("Name is required");
+      this._notification.addError({
+        context: "customer",
+        message: "Name is required",
+      });
     }
   }
 
