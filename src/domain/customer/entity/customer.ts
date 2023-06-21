@@ -12,6 +12,10 @@ export class Customer extends Entity {
     this._id = id;
     this._name = name;
     this.validate();
+
+    if (this._notification.hasErrors()) {
+      throw new Error(this._notification.messages());
+    }
   }
 
   validate(): void {
