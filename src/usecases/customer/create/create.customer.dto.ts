@@ -1,5 +1,4 @@
 export interface InputCreateCustomerDto {
-  id: string;
   name: string;
   address: {
     street: string;
