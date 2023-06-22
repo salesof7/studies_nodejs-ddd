@@ -3,6 +3,7 @@ import express, { type Request, type Response } from "express";
 import CustomerRepository from "../../customer/repository/sequelize/customer.repository";
 import { CreateCustomerUseCase } from "../../../usecases/customer/create/create.customer.usecase";
 import { ListCustomerUseCase } from "../../../usecases/customer/list/list.customer.usecase";
+import { CustomerPresenter } from "../presenters/customer.presenter";
 
 export const customerRoute = express.Router();
 
@@ -27,10 +28,10 @@ customerRoute.post("/", async (req: Request, res: Response): Promise<void> => {
 
 customerRoute.get("/", async (req: Request, res: Response): Promise<void> => {
   const usecase = new ListCustomerUseCase(new CustomerRepository());
-  try {
-    const output = await usecase.execute({});
-    res.send(output);
-  } catch (err) {
-    res.status(500).send(err);
-  }
+  const output = await usecase.execute({});
+
+  res.format({
+    json: async () => res.send(output),
+    xml: async () => res.send(CustomerPresenter.toXML(output)),
+  });
 });
